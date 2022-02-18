@@ -6,30 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import com.app.baseprojectamanattri.data.remote.post.entities.Result
 import com.app.baseprojectamanattri.network.ErrorCodes
 import com.app.baseprojectamanattri.network.NetworkError
-import io.reactivex.Single
-import io.reactivex.disposables.Disposable
 import retrofit2.HttpException
 
-private fun <T> MutableLiveData<Result<T>>.setLoading() = postValue(Result.Loading)
-private fun <T> MutableLiveData<Result<T>>.setSuccess(data: T) = postValue(Result.Success(data))
-private fun <T> MutableLiveData<Result<T>>.setError(throwable: Throwable, showErrorView: Boolean) = postValue(Result.Error(throwable,showErrorView))
 
-
-
-fun <Param> Single<Param>.defaultSubscrition(liveData: MutableLiveData<Result<Param>>, showErrorView:Boolean): Disposable {
-    return this.doOnSubscribe {
-        liveData.setLoading()
-    }.subscribe({
-        liveData.setSuccess(it)
-    }, {
-        var networkError = parseException(it)
-        if (networkError != null)
-            liveData.setError(networkError, showErrorView)
-        else
-            liveData.setError(it, showErrorView)
-        liveData.setError(it,showErrorView)
-    })
-}
 
 fun <T> LiveData<Result<T>>.customObserver(
     owner: LifecycleOwner,

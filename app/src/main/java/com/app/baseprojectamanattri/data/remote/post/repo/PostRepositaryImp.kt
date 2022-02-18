@@ -5,41 +5,36 @@ import com.app.baseprojectamanattri.domain.post.models.PostModel
 import com.app.baseprojectamanattri.domain.post.repositary.PostRepositary
 import com.app.baseprojectamanattri.network.ConnectionHelper
 import com.app.baseprojectamanattri.network.api.ApiService
-import io.reactivex.Observable
-import io.reactivex.Single
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
 class PostRepositaryImp @Inject constructor(
-    val apiService: ApiService,
-    val sharedPrefManager: SharedPrefManager,
-    val connectionHelper: ConnectionHelper,
+    private val apiService: ApiService,
+    private val sharedPrefManager: SharedPrefManager,
+    private val connectionHelper: ConnectionHelper,
 ) : PostRepositary {
 
-    private val posts: List<PostModel>? = null
-        get() = field ?: sharedPrefManager.getPosts()
+   /* private val posts: List<PostModel> = null
+        get() = field ?: sharedPrefManager.getPosts()*/
 
-
-    override fun getPostsRx(): Single<List<PostModel>> {
-        return if (connectionHelper.isConnected()) {
-            apiService.listReposRx().map {
-                it.map {
-                    it.mapToModel()
-                }
-            }.doOnSuccess {
-                sharedPrefManager.savePosts(it)
-            }
+    override fun getPosts(): Flow<List<PostModel>> = flow {
+        /*if (connectionHelper.isConnected()) {
+            emit(apiService.listPosts().map {
+                it.mapToModel()
+            })
         } else {
-            Single.defer {
-                return@defer Single.just(posts?: listOf())
-            }
-        }
-    }
-
-    override fun getPost(postId: String): Single<PostModel> {
-        return apiService.getPostById(postId).map {
+            emit(posts ?: listOf())
+        }*/
+        emit(apiService.listPosts().map {
             it.mapToModel()
-        }
-    }
+        })
+    }.flowOn(Dispatchers.Default)
 
+    override fun getPost(postId: String): Flow<PostModel> = flow {
+        emit(apiService.getPostById(postId).mapToModel())
+    }.flowOn(Dispatchers.Default)
 
 }

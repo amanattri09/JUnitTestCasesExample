@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BaseProjectAmanAttri</string>
+    <string name="app_name">Coroutines Flow Example</string>
     <string name="session_expired">session_expired</string>
     <string name="alert">Alert</string>
     <string name="post_detail">Post Detail</string>

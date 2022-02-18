@@ -39,7 +39,7 @@ class PostActivity : BaseActivity<ActivityPostLayoutBinding>() {
     }
 
     private fun init() {
-        viewmodel.fetchPostByRx()
+        viewmodel.fetchPostUsingFlow()
     }
 
     private fun setViews() {
