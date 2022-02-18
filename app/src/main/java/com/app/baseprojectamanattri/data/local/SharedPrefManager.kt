@@ -25,15 +25,19 @@ class SharedPrefManager @Inject constructor(val sharedPreferences: SharedPrefere
         return sharedPreferences.getValue(SESSION_ID)
     }
 
-    fun savePosts(it: List<PostModel>?) {
+    fun savePosts(it: List<PostModel>) {
         var posts = gson.toJson(it)
         sharedPreferences.saveValue(POSTS, posts)
     }
 
-    fun getPosts(): List<PostModel>? {
+    fun getPosts(): List<PostModel> {
+        var list= mutableListOf<PostModel>()
         var posts = sharedPreferences.getValue<String>(POSTS)
-        val empMapType = object : TypeToken<List<PostModel>>() {}.type
-        return gson.fromJson<List<PostModel>>(posts, empMapType)
+        posts?.let {
+            val empMapType = object : TypeToken<List<PostModel>>() {}.type
+            list = gson.fromJson(posts, empMapType)
+        }
+        return list
     }
 
 }

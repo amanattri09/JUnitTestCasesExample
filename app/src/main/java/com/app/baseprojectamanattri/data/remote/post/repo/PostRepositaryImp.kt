@@ -17,24 +17,26 @@ class PostRepositaryImp @Inject constructor(
     private val connectionHelper: ConnectionHelper,
 ) : PostRepositary {
 
-   /* private val posts: List<PostModel> = null
-        get() = field ?: sharedPrefManager.getPosts()*/
+    private var posts: List<PostModel> = arrayListOf()
+        get() = sharedPrefManager.getPosts()
 
     override fun getPosts(): Flow<List<PostModel>> = flow {
-        /*if (connectionHelper.isConnected()) {
+        if (connectionHelper.isConnected()) {
             emit(apiService.listPosts().map {
                 it.mapToModel()
-            })
+            }.saveToPref(sharedPrefManager))
         } else {
-            emit(posts ?: listOf())
-        }*/
-        emit(apiService.listPosts().map {
-            it.mapToModel()
-        })
+            emit(posts)
+        }
     }.flowOn(Dispatchers.Default)
 
     override fun getPost(postId: String): Flow<PostModel> = flow {
         emit(apiService.getPostById(postId).mapToModel())
     }.flowOn(Dispatchers.Default)
 
+}
+
+private fun List<PostModel>.saveToPref(sharedPrefManager: SharedPrefManager): List<PostModel> {
+    sharedPrefManager.savePosts(this)
+    return this
 }
