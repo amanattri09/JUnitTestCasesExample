@@ -1,26 +1,13 @@
-# Android-Architecture-Project
+# Coroutines "Flow"
 
-This project is a Demo of creating a stable Android structure for any Api/Database based project. <br>
-Project structure is based on Clean architecture by Robert C Martin<br>
+This project is a example of Flow in Coroutines<br>
 
-<b>Project uses following major dependencies in this project : </b><br>
-
--RX Java <br>
--Dagger Hilt <br>
-
-<b>Benifits of using this project: </b><br>
-
--All the errors during any api call , reaches back to BaseActivity. <br>
--Session expired is easily managed for all screens as all errors reaches back on same point of code  <br>
--Project also works offline.When device is connected, Data is converted to json and saved in Shared Prefrence and when app is opened offline then data is displayed from Shared Prefrence <br>
--Project will give you an opportunity to learn about Extentions functions,Lambda's,Sealed classes and Genric classes <br>
--Project shows reusable code for displaying progress bar and error dialog for any screen and api. <br>
--There is common flow for consuming any api and handling their responses. Once all errors/cases are handled for single api the same flow will work for all apis so you have reduced 
-the probability of any api based error to almost 0% :)
-
+-I have consumed apis using "Flow" which is common requiremnt for any developer. <br>
+-Example also serves as "Clean Architecture" using flow. <br>
+-There is reusable flow of consuming an api. <br>
+-There is reusable flow of displaying progress bar and error. <br>
+-All errors reaches back to same one point where you can easily manage session expired errors. <br>
 
 <img src="https://github.com/amanattri09/Android-Architecture-Project/blob/master/media/media_2.png" width="500" style="max-width:200%;"> <br>
-<img src="https://github.com/amanattri09/Android-Architecture-Project/blob/master/media/media_3.png" width="500" style="max-width:200%;">
- 
- 
+
  
