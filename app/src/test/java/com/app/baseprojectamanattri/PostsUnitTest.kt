@@ -3,15 +3,11 @@ package com.app.baseprojectamanattri
 import android.app.Application
 import android.content.SharedPreferences
 import com.app.baseprojectamanattri.data.local.SharedPrefManager
-import com.app.baseprojectamanattri.data.remote.post.repo.PostRepositaryImp
-import com.app.baseprojectamanattri.di.TestRepositaryProvider
+import com.app.baseprojectamanattri.di.TestRepositoryProvider
 import com.app.baseprojectamanattri.domain.post.repositary.PostRepositary
-import com.app.baseprojectamanattri.network.*
-import com.app.baseprojectamanattri.network.api.ApiService
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.runBlocking
-import okhttp3.OkHttpClient
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -20,7 +16,6 @@ import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 import org.mockito.junit.MockitoJUnitRunner
-import retrofit2.Retrofit
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -39,7 +34,7 @@ class PostsUnitTest {
     @Before
     fun onSetUp() {
         MockitoAnnotations.initMocks(this)
-        postRepository=TestRepositaryProvider().getPostRepositary(application, SharedPrefManager(sharedPreferences))
+        postRepository=TestRepositoryProvider().getPostRepository(application, SharedPrefManager(sharedPreferences))
     }
 
     @Test

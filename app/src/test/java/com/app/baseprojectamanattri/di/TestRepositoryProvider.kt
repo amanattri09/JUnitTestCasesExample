@@ -6,9 +6,9 @@ import com.app.baseprojectamanattri.data.remote.post.repo.PostRepositaryImp
 import com.app.baseprojectamanattri.domain.post.repositary.PostRepositary
 import com.app.baseprojectamanattri.network.ConnectionHelper
 
-class TestRepositaryProvider {
+class TestRepositoryProvider {
 
-    fun getPostRepositary(application: Application,sharedPrefManager: SharedPrefManager): PostRepositary{
+    fun getPostRepository(application: Application, sharedPrefManager: SharedPrefManager): PostRepositary{
         val connectionHelper = ConnectionHelper(application)
         return PostRepositaryImp(TestNetworkDependencyProvider().getApiService(),sharedPrefManager,connectionHelper)
     }
