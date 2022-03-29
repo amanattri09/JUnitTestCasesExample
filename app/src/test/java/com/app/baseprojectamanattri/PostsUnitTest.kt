@@ -28,7 +28,7 @@ import retrofit2.Retrofit
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 @RunWith(MockitoJUnitRunner::class)
-class ExampleUnitTest {
+class PostsUnitTest {
 
     lateinit var postRepository: PostRepositary
     @Mock
@@ -43,12 +43,20 @@ class ExampleUnitTest {
     }
 
     @Test
-     fun addition_isCorrect() = runBlocking {
+     fun validatePosts() = runBlocking {
         postRepository.getPosts().catch {e->
-            e.cause
-            assert(false)
+            assertTrue(false)
         }.collect {
             assertTrue(it.isNotEmpty())
+        }
+    }
+
+    @Test
+    fun validateGetPostById()= runBlocking {
+        postRepository.getPost("1").catch {e->
+            assertTrue(false)
+        }.collect {
+            assertNotNull(it)
         }
     }
 }
