@@ -7,7 +7,7 @@ import javax.inject.Inject
 class ConnectionHelper @Inject constructor(val context: Application) {
 
     fun isConnected(): Boolean {
-        return context.isNetworkAvailable()
+        return true
     }
 
 }

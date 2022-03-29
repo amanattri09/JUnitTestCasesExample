@@ -8,7 +8,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import javax.inject.Inject
 
-class SharedPrefManager @Inject constructor(val sharedPreferences: SharedPreferences) {
+class SharedPrefManager @Inject constructor(private val sharedPreferences: SharedPreferences) {
 
     private val gson = Gson()
 

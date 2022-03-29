@@ -15,7 +15,8 @@
         android:theme="@style/Theme.BaseProjectAmanAttri">
         <activity android:name=".presentation.views.postdetail.PostDetailActivity"></activity>
         <activity android:name=".presentation.views.splash.SplashActivity" />
-        <activity android:name=".presentation.views.post.PostActivity">
+        <activity android:name=".presentation.views.post.PostActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

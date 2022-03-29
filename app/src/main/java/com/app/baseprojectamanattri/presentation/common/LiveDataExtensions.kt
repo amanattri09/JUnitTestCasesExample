@@ -16,7 +16,7 @@ fun <T> LiveData<Result<T>>.customObserver(
     onSuccess: ((data:T) -> Unit)?,
     onError: ((throwable:Throwable,showError:Boolean) -> Unit)?
 ) {
-    this.observe(owner, {
+    this.observe(owner) {
         when (it) {
             is Result.Loading -> {
                 onLoading.invoke(true)
@@ -27,22 +27,8 @@ fun <T> LiveData<Result<T>>.customObserver(
             }
             is Result.Error -> {
                 onLoading.invoke(false)
-                onError?.invoke(it.throwable,it.showErrorView)
+                onError?.invoke(it.throwable, it.showErrorView)
             }
-        }
-    })
-}
-
-fun parseException(it: Throwable?): NetworkError {
-    return when (it) {
-        is HttpException -> {
-            val exception: HttpException = it as HttpException
-            var networkError = NetworkError(exception.code(), exception.message())
-            return networkError
-        }
-        else -> {
-            var networkError = NetworkError(ErrorCodes.OTHER_ERROR, it?.message)
-            return networkError
         }
     }
 }
